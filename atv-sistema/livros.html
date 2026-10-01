@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Acervo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Acervo da Biblioteca</h1>
+    </header>
+
+    <main>
+
+        {% if livros %}
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Ano</th>
+                <th>Autor</th>
+                <th>Categoria</th>
+                <th>Ação</th>
+            </tr>
+
+            {% for livro in livros %}
+
+            <tr>
+                <td>{{ livro.id_livro }}</td>
+                <td>{{ livro.titulo }}</td>
+                <td>{{ livro.ano }}</td>
+                <td>{{ livro.autor }}</td>
+                <td>{{ livro.categoria }}</td>
+
+                <td>
+                    <a href="/excluir/{{ livro.id_livro }}"
+                       onclick="return confirm('Deseja excluir este livro?')">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <p>Nenhum livro cadastrado.</p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/cadastro" class="botao">Cadastrar livro</a>
+
+        <a href="/" class="botao">Início</a>
+
+    </main>
+
+</body>
+</html>
